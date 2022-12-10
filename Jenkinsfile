@@ -33,9 +33,9 @@ podTemplate(namespace: 'jenkins-ci', yaml: '''
       git url: 'https://github.com/nltimv/docker-ansible-ci', branch: 'main'
       container('kaniko') {
         stage('Build image') {
-          sh '''
+          sh """
             /kaniko/executor --context "`pwd`" --destination $imageTag:$buildNumber --destination $imageTag:latest
-          '''
+          """
         }
       }
     }
