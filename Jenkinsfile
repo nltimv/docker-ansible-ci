@@ -29,14 +29,12 @@ podTemplate(namespace: 'jenkins-ci', yaml: '''
               path: config.json
 ''') {
   node(POD_LABEL) {
-    stage('Build') {
-      git url: 'https://github.com/nltimv/docker-ansible-ci', branch: 'main'
-      container('kaniko') {
-        stage('Build image') {
-          sh """
-            /kaniko/executor --context "`pwd`" --destination $imageTag:$buildNumber --destination $imageTag:latest
-          """
-        }
+    container('kaniko') {
+      stage('Build image') {
+        git url: 'https://github.com/nltimv/docker-ansible-ci', branch: 'main'
+        sh """
+          /kaniko/executor --context "`pwd`" --destination $imageTag:$buildNumber --destination $imageTag:latest
+        """
       }
     }
   }
