@@ -34,7 +34,7 @@ podTemplate(namespace: 'jenkins-ci', yaml: '''
       container('kaniko') {
         stage('Build image') {
           sh '''
-            /kaniko/executor --context "`pwd`" --destination ${imageTag}:${buildNumber} --destination ${imageTag}:latest
+            /kaniko/executor --context "`pwd`" --destination $imageTag:$buildNumber --destination $imageTag:latest
           '''
         }
       }
